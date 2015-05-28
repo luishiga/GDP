@@ -1,0 +1,220 @@
+body {background: #00338D; min-width:960px; max-height:800px; 	; font: 12px/1.7em arial, sans-serif; }
+
+/* -------------------------------------------------------------- 
+   Login
+-------------------------------------------------------------- */
+
+#login { width: 450px; position:absolute; left: 25px; right: auto; top: 230px; bottom: auto; text-align: center;  }
+
+#login h1#title
+{
+	background: no-repeat 0 0;
+	width: 159px;
+	height: 36px;
+	line-height: 800px;
+	margin: 0 auto .90em;
+	overflow: hidden;	
+}
+
+	#login h1#title a { display: block; }
+	
+#login-body 
+{ 
+	background: #FFF; 
+	padding-bottom: 15px; 
+	border: 5px solid #FFA100;
+	padding: 0 0 10px 0; 
+	text-align: left;
+	color:#00338D;
+	width: 100%; 
+	overflow: hidden; 
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px;	
+	-moz-box-shadow: 1px 1px 10px rgba(0,0,0,.25);
+	-webkit-box-shadow: 1px 1px 10px  rgba(0,0,0,.25);
+}
+
+
+#login-body form { padding: 0 0 0 0px; position: relative; }
+
+#login-body input#login_password { width: 170px; position: absolute; top: 5px; left: 5px; }
+
+
+#login-body input.text 
+{
+    width: 275px;
+	font: bold 18px Helvetica, Arial, Verdana, sans-serif;
+	letter-spacing: -1px;
+	vertical-align: bottom;
+}
+
+
+#login-body .field { width: 100%; position: relative; float: left; }
+	
+#login-body .pad { padding: 20px 20px 0 20px; }
+
+#login-body label,
+#login-body .label 
+{
+	font-size: 12px;
+    float: left;
+    line-height: 15px;
+    width: 100px;
+    padding: 15px 0 0 0;
+	margin: 0;
+	text-align: left;
+	font-weight: bold; 
+	
+}
+
+#login-body .field div 
+{
+     float: left;
+     position: relative;
+     width: 300px;
+     padding: 0;
+	 margin: 0;
+ }
+             
+#login-body .field div span.input { text-align: right; line-height: 3em; font-size: 11px; padding-right: 10px !important; }
+
+#login-body .checkbox input { float: none !important; display: inline !important;}
+#login-body .checkbox label { float: none; display: inline; font-weight: normal; font-size: 11px; }
+
+#login-body input,
+#login-body select,
+#login-body textarea 
+{
+	margin: 0;
+	padding: 5px;
+	border: solid 1px #CCC;
+	color: #444;
+	background: #fff;
+	-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#login-body input[type=checkbox] { border: none; }
+		
+#login-body span.input,
+#login-body  span.checkbox
+{
+	display: block;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background: #EEE;
+	padding: 5px;
+	margin: 0 0 15px 0;
+}
+
+
+
+
+
+/*****************************/
+
+
+
+
+
+#bemvindo { width: 450px; margin-left: 15px; margin-right: auto; margin-top: 200px; margin-bottom: 0; text-align: center;  }
+
+
+#bemvindo-body 
+{ 
+	background: #FFF; 
+	padding-bottom: 15px; 
+	border: 5px solid #FFA100;
+	padding: 0 0 10px 0; 
+	text-align: left;
+	color:#00338D;
+	width: 100%; 
+	overflow: hidden; 
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px;	
+	-moz-box-shadow: 1px 1px 10px rgba(0,0,0,.25);
+	-webkit-box-shadow: 1px 1px 10px  rgba(0,0,0,.25);
+}
+
+.erro {
+	color:red;
+	font-size:13px;
+	font-weight:bold;
+	
+}
+
+#bemvindo-body form { padding: 0 0 0 0px; position: relative; }
+
+#bemvindo-body input#login_password { width: 170px; position: absolute; top: 5px; left: 5px; }
+
+
+#bemvindo-body input.text 
+{
+    width: 275px;
+	font: bold 18px Helvetica, Arial, Verdana, sans-serif;
+	letter-spacing: -1px;
+	vertical-align: bottom;
+}
+
+
+#bemvindo-body .field { width: 100%; position: relative; float: left; }
+	
+#bemvindo-body .pad { padding: 20px 20px 0 20px; }
+
+#bemvindo-body label,
+#bemvindo-body .label 
+{
+	font-size: 12px;
+    float: left;
+    line-height: 15px;
+    width: 100px;
+    padding: 15px 0 0 0;
+	margin: 0;
+	text-align: left;
+	font-weight: bold; 
+	
+}
+
+#bemvindo-body .field div 
+{
+     float: left;
+     position: relative;
+     width: 300px;
+     padding: 0;
+	 margin: 0;
+ }
+             
+#bemvindo-body .field div span.input { text-align: right; line-height: 3em; font-size: 11px; padding-right: 10px !important; }
+
+#bemvindo-body .checkbox input { float: none !important; display: inline !important;}
+#bemvindo-body .checkbox label { float: none; display: inline; font-weight: normal; font-size: 11px; }
+
+#bemvindo-body input,
+#bemvindo-body select,
+#bemvindo-body textarea 
+{
+	margin: 0;
+	padding: 5px;
+	border: solid 1px #CCC;
+	color: #444;
+	background: #fff;
+	-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#bemvindo-body input[type=checkbox] { border: none; }
+		
+#bemvindo-body span.input,
+#bemvindo-body  span.checkbox
+{
+	display: block;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background: #EEE;
+	padding: 5px;
+	margin: 0 0 15px 0;
+}

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>GDP - {% block title %}{% endblock title %}</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+
+	<!-- ===================== TOUCH ICONS ===================== -->
+	<link rel="shortcut icon" href="/static/favicon.png">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="/static/apple-touch-icon-57-precomposed.png">
+
+		<!-- ===================== MASTER CSS ===================== -->
+	<link rel="stylesheet" type="text/css" href="/static/css/jasny-bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+
+		<!-- ===================== ICONS CSS ===================== -->
+	<link rel="stylesheet" type="text/css" href="/static/css/icon/fugue.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/icon/elusive.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/icon/font-awesome.min.css">
+
+	<!-- ===================== SITE CSS ===================== -->
+	<link rel="stylesheet" type="text/css" href="/static/css/default.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/default.responsive.min.css">
+
+	<!-- ===================== PLUGINS CSS ===================== -->
+		<link rel="stylesheet" type="text/css" href="/static/css/plugins/uniform.default.css">
+
+		<!-- ===================== JQUERY UI CSS ===================== -->
+		<link rel="stylesheet" type="text/css" href="/static/css/jui/jquery.ui.min.css">
+
+		<!-- Vendors -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="/static/js/vendors/jquery-ui-1.9.2.min.js"></script>
+
+
+	<script src="/static/js/vendors/modernizr-2.6.2.min.js"></script>
+
+	{% block extrahead %}
+	{% endblock extrahead %}
+
+
+    </head>
+    <body class="body5">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">Você está usando um navegador <strong>ultrapassado</strong>. Por favor <a href="http://browsehappy.com/">atualize seu navegador</a> ou <a href="http://www.google.com/chromeframe/?redirect=true">ative o Google Chrome Frame</a> para melhorar a sua experiência.</p>
+        <![endif]-->
+
+        <div id="wrapper" class="boxed">
+            <div id="wrapper-inner" class="pattern8">
+
+                <!-- Start Main Header -->
+                <div id="main-header">
+		    <div class="container-fluid">
+			<div class="row-fluid">
+			    <div class="span12">
+				<div class="title">
+				    <h1 style="margin:0"><img src="/sipj/static/img/logo56.jpg" style="margin:0"/></h1>
+			        </div>
+                                <!-- Start Messages Panel -->
+				<div style="position: absolute; left: 330px; top: 9px;">
+				{% block mensagens %}
+				    {% if messages %}
+					{% for message in messages %}
+					<div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Mensagem do Sistema:</strong> {{ message|safe }}
+					</div>
+					{% endfor %}
+				    {% endif %}
+				{% endblock mensagens %}
+				</div>
+                                <!-- Start Header Panel -->
+				<div class="header-panel">
+				    <div id="dropdown-patterns" class="dropdown" rel="tooltip" data-placement="left" title="Cadastrar Projeto">
+					<a href="/si_iniciativas/projetos/cadastro/externo/" class="menu dropdown-toggle" ><i class="icon iconfa-phone"></i>&nbsp&nbsp<i class="icon iconfa-caret-right"></i>&nbsp&nbsp<i class="icon iconfa-file-alt"></i></a>
+				    </div>
+				    <div id="dropdown-search" class="dropdown">
+					<a href="#" class="menu dropdown-toggle" data-toggle="dropdown"><i class="icon iconfa-search"></i></a>
+					<div class="dropdown-menu pull-right" role="menu">
+					    <form>
+						<input name="search" type="text" class="span12" placeholder="Entre com uma palavra-chave...">
+					    </form>
+					</div>
+				    </div>
+				    <div id="dropdown-patterns" class="dropdown" rel="tooltip" data-placement="bottom" title="Logout">
+					<a href="/logout/" class="menu dropdown-toggle" onclick="return confirm('Deseja realmente fazer logout do sistema?')" ><i class="icon iconfa-off"></i></a>
+				    </div>
+				    <a href="#" class="menu" id="menu-phone" data-menu="mobile"><i class="icon iconfa-tasks"></i></a>
+				</div>
+                                <!-- End Header Panel -->
+			    </div>
+			</div>
+		    </div>
+                </div>
+                <!-- End Main Header -->
+
+                <!-- Start Sidebar -->
+                <div id="sidebar">
+
+                    <!-- Start Profile Panel -->
+                    <div class="profile" data-detach="profile">
+                        <div class="profile-pic">
+			    <div class="btn-group">
+
+				    <img src="/sipj/media/{{membro_logado.foto_quadrada}}" width="40px" height="40px" alt="{{membro_logado.user.get_full_name}}" class="dropdown-toggle" data-toggle="dropdown">
+				    <!--<ul class="dropdown-menu">
+					    <li><a href="#"><i class="cion iconfa-pencil"></i> Editar Perfil</a></li>
+					    <li><a href="#"><i class="cion iconfa-cog"></i>  Configurações</a></li>
+					    <li class="divider"></li>
+					    <li><a href="/si_iniciativas/logout/"><i class="cion iconfa-off"></i> Logout</a></li>
+				    </ul>-->
+			    </div>
+			    <!--<span class="caret"></span>-->
+						</div>
+                        <div class="profile-info">
+                            <a href="/si_iniciativas/membros/"><span class="name" style="color: #333">{{membro_logado.user.get_full_name}}</span></a>
+                            <span class="job">{{membro_logado.get_cargo}}</span>
+						</div>
+                        <div class="profile-panel">
+                            <!-- Start Messages -->
+                            <div class="profile-panel-menu" id="panel-message">
+                                <a href="/si_iniciativas/" class="menu">
+                                    <i class="icon icon-home"></i>
+                                    <span class="text">Painel Inicial</span>
+                                </a>
+                            </div><!-- End Messages -->
+
+                            <!-- Start Notification -->
+                            <div class="profile-panel-menu" id="panel-notification">
+                                <a href="#" data-toggle="dropdown" class="menu">
+                                    <i class="icon icon-bell"></i>
+                                    <span class="text">Notificações</span>
+                                    <span class="label label-important">0</span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="header">Notificações</li>
+                                    {% block notificacoes %} {% endblock notificacoes %}
+                                    <li class="footer"><a href="#">Apagar todas</a></li>
+                                </ul>
+                            </div><!-- End Notification -->
+                        </div>
+                    </div><!-- End Profile Panel -->
+
+                    <!-- Start Main Menu -->
+                    <ul class="nav-mainmenu" id="nav-mainmenu">
+
+                        <!-- Start MEMBROS Menu -->
+                        <li class="accordion-group">
+                            <a data-toggle="collapse" data-parent="#nav-mainmenu" href="#generals" class="{% if area_membros %}active{% endif %}"><span class="icon iconfa-group"></span><span class="text">Membros</span><span class="badge pull-right">4</span></a>
+                            <!-- Start MEMBROS Sub Menu -->
+                            <ul class="nav-submenu collapse {% if area_membros %}in{% endif %}" id="generals">
+                                <li class="accordion-group">
+                                    <a data-toggle="collapse" data-parent="#perfil" href="#meu_perfil" class="{% ifequal diretorio 'Editar Perfil' %}active collapsed{% endifequal %}{% ifequal diretorio 'Visualizar Perfil' %}active collapsed{% endifequal %}{% ifequal diretorio 'Alterar Foto' %}active collapsed{% endifequal %}"><span class="icon iconfugue16-user"></span> Meu Perfil<span class="caret pull-right"></span></a>
+                                    <ul class="nav-subitem collapse {% ifequal diretorio 'Editar Perfil' %}in{% endifequal %}{% ifequal diretorio 'Visualizar Perfil' %}in{% endifequal %}{% ifequal diretorio 'Alterar Foto' %}in{% endifequal %}" id="meu_perfil">
+                                        <li><a href="/si_iniciativas/membros/"><span class="icon iconfugue16-eye"></span> Visualizar Perfil</a></li>
+                                        <li><a href="/si_iniciativas/membros/editar_perfil/"><span class="icon iconfugue16-user--pencil"></span> Editar Perfil</a></li>
+                                        <li><a href="/si_iniciativas/membros/alterar_foto/"><span class="icon iconfugue16-picture--pencil"></span> Alterar Foto</a></li>
+                                    </ul>
+                                </li>
+				<li><a href="/si_iniciativas/membros/historico/" class="{% ifequal diretorio 'Historico' %}active{% endifequal %}"><span class="icon iconfugue16-clock"></span> Histórico</a></li>
+                                <li><a href="/si_iniciativas/membros/buscar_membros/" class="{% ifequal diretorio 'Buscar Contatos' %}active{% endifequal %}"><span class="icon iconfugue16-address-book"></span> Buscar Contatos</a></li>
+                                <li><a href="/si_iniciativas/membros/busca_avancada/" class="{% ifequal diretorio 'Busca Avancada' %}active{% endifequal %}"><span class="icon iconfugue16-magnifier-left"></span> Busca Avançada</a></li>
+                                {% if membro_logado.cargo.administrador %}
+				    <li><a href="/si_iniciativas/membros/cadastrar_membros/" class="{% ifequal diretorio 'Cadastrar Membros' %}active{% endifequal %}"><span class="icon iconfugue16-user--plus"></span> Cadastrar Membros</a></li>
+				    <li><a href="/si_iniciativas/admin/" target="_blank"><span class="icon iconfugue16-equalizer"></span> Administração do Sistema</a></li>
+				{% endif %}
+                            </ul>
+                            <!-- End MEMBROS Sub Menu -->
+                        </li>
+                        <!-- End MEMBROS Menu -->
+
+                        <!-- Start PROJETOS Menu -->
+                        <li class="accordion-group">
+                            <a data-toggle="collapse" data-parent="#nav-mainmenu" href="#components" class="{% if area_projetos %}active{% endif %}"><span class="icon iconfa-paste"></span><span class="text">Projetos</span><span class="badge pull-right">5</span></a>
+                            <ul class="nav-submenu collapse {% if area_projetos %}in{% endif %}" id="components">
+                                <li><a href="/si_iniciativas/projetos/" class="{% ifequal diretorio 'Painel de Atividades' %}active{% endifequal %}"><span class="icon iconfugue16-application-monitor"></span> Painel de Atividades</a></li>
+                                <li class="accordion-group">
+                                    <a data-toggle="collapse" data-parent="#cadastrar" href="#cadastrar" class="{% ifequal diretorio 'Cadastrar Projeto Externo' %}active collapsed{% endifequal %}{% ifequal diretorio 'Cadastrar Projeto Interno' %}active collapsed{% endifequal %}{% ifequal diretorio 'Cadastrar Projeto Evento' %}active collapsed{% endifequal %}{% ifequal diretorio 'Cadastrar Equipe de Processo' %}active collapsed{% endifequal %}{% ifequal diretorio 'Cadastrar Nucleo' %}active collapsed{% endifequal %}{% ifequal diretorio 'Cadastrar Orgao Administrativo' %}active collapsed{% endifequal %}"><span class="icon iconfugue16-blue-document--plus"></span> Cadastrar<span class="caret pull-right"></span></a>
+                                    <ul class="nav-subitem collapse {% ifequal diretorio 'Cadastrar Projeto Externo' %}in{% endifequal %}{% ifequal diretorio 'Cadastrar Projeto Interno' %}in{% endifequal %}{% ifequal diretorio 'Cadastrar Projeto Evento' %}in{% endifequal %}{% ifequal diretorio 'Cadastrar Equipe de Processo' %}in{% endifequal %}{% ifequal diretorio 'Cadastrar Nucleo' %}in{% endifequal %}{% ifequal diretorio 'Cadastrar Orgao Administrativo' %}in{% endifequal %}" id="cadastrar">
+                                        <li><a href="/si_iniciativas/projetos/cadastro/externo/"><span class="icon iconfugue16-blueprint--plus"></span> Projeto Externo</a></li>
+                                        {% if membro_logado.cargo.administrador %}
+					<li><a href="/si_iniciativas/projetos/cadastro/interno/"><span class="icon iconfugue16-pill--plus"></span> Projeto Interno</a></li>
+                                        <li><a href="/si_iniciativas/projetos/cadastro/evento/"><span class="icon iconfugue16-calendar--plus"></span> Projeto Evento</a></li>
+					<li><a href="/si_iniciativas/projetos/cadastro/processo/"><span class="icon iconfugue16-chart--plus"></span> Equipe de Processo</a></li>
+                                        <li><a href="/si_iniciativas/projetos/cadastro/nucleo/"><span class="icon iconfugue16-bank--plus"></span> Núcleo</a></li>
+                                        <li><a href="/si_iniciativas/projetos/cadastro/orgao/"><span class="icon iconfugue16-medal--plus"></span> Orgão Administrativo</a></li>
+					{% endif %}
+				    </ul>
+                                </li>
+				<li><a href="/si_iniciativas/projetos/arquivo/" class="{% ifequal diretorio 'Arquivo de Projetos' %}active{% endifequal %}"><span class="icon iconfugue16-folder-horizontal-open"></span> Arquivo de Projetos</a></li>
+                                {% if membro_logado.cargo.administrador or membro_logado.cargo.senior or membro_logado.funcao_secundaria.senior %}
+				<li class="accordion-group">
+                                    <a data-toggle="collapse" data-parent="#gestao" href="#gestao" class="{% ifequal diretorio 'Triagem' %}active collapsed{% endifequal %}{% ifequal diretorio 'Gestao de Portfolio' %}active collapsed{% endifequal %}{% ifequal diretorio 'Lista de Espera' %}active collapsed{% endifequal %}"><span class="icon iconfugue16-projection-screen--pencil"></span> Gestão de Projetos<span class="caret pull-right"></span></a>
+                                    <ul class="nav-subitem collapse {% ifequal diretorio 'Triagem' %}in{% endifequal %}{% ifequal diretorio 'Gestao de Portfolio' %}in{% endifequal %}{% ifequal diretorio 'Lista de Espera' %}in{% endifequal %}" id="gestao">
+                                        <li><a href="/si_iniciativas/projetos/triagem/"><span class="icon iconfugue16-card-address"></span> Triagem</a></li>
+                                        <li><a href="/si_iniciativas/projetos/gp/"><span class="icon iconfugue16-cheque-pen"></span> Gestão de Portfólio</a></li>
+                                        <li><a href="/si_iniciativas/projetos/lista_espera/"><span class="icon iconfugue16-drawer"></span> Lista de Espera</a></li>
+                                    </ul>
+                                </li>
+				{% endif %}
+                            </ul>
+                        </li>
+                        <!-- End PROJETOS Menu -->
+
+			<!-- Start EQUIPES Menu -->
+                        <li class="accordion-group">
+                            <a data-toggle="collapse" data-parent="#nav-mainmenu" href="#pages" class="{% if area_equipes %}active{% endif %}"><span class="icon iconfa-cogs"></span><span class="text">Meus Times</span><span class="badge pull-right">3</span></a>
+                            <!-- Start EQUIPES Sub Menu -->
+                            <ul class="nav-submenu collapse {% if area_equipes %}in{% endif %}" id="pages">
+                                <li class="accordion-group">
+                                    <a data-toggle="collapse" data-parent="#eprojetos" href="#eprojetos" class="{% ifequal diretorio 'Projeto' %}active collapsed{% endifequal %}"><span class="icon iconfugue16-ruler--pencil"></span> Equipes de Projeto<span class="caret pull-right"></span></a>
+                                    <ul class="nav-subitem collapse {% ifequal diretorio 'Projeto' %}in{% endifequal %}" id="eprojetos">
+                                        <li><a href="/si_iniciativas/projetos/detalhes/1"><span class="icon iconfugue16-edit-code"></span> Projeto 1</a></li>
+                                    </ul>
+                                </li>
+				<li class="accordion-group">
+                                    <a data-toggle="collapse" data-parent="#esuporte" href="#esuporte" class="{% ifequal diretorio 'Suporte' %}active collapsed{% endifequal %}"><span class="icon iconfugue16-shield"></span> Equipes de Suporte<span class="caret pull-right"></span></a>
+                                    <ul class="nav-subitem collapse {% ifequal diretorio 'Suporte' %}in{% endifequal %}" id="esuporte">
+                                        <li><a href="/si_iniciativas/projetos/detalhes/2"><span class="icon iconfugue16-edit-code"></span> Equipe 1</a></li>
+                                  </ul>
+                                </li>
+
+                            </ul><!-- End EQUIPES Sub Menu -->
+                        </li>
+                        <!-- End EQUIPES Menu -->
+
+                        <!-- Start DESENVOLVER Menu -->
+                        <li class="accordion-group">
+                            <a data-toggle="collapse" data-parent="#nav-mainmenu" href="#forms" class="{% if area_desenvolver %}active{% endif %}"><span class="icon iconfa-signal"></span><span class="text">Desenvolver</span><span class="badge pull-right">5</span></a>
+                            <ul class="nav-submenu collapse {% if area_desenvolver %}in{% endif %}" id="forms">
+                                <li><a href="form-elements.html"><span class="icon iconfugue16-application-form"></span> Elements</a></li>
+                                <li><a href="form-layout.html"><span class="icon iconfugue16-application-detail"></span> Layout</a></li>
+                                <li><a href="form-validation.html"><span class="icon iconfugue16-application-ab"></span> Validation</a></li>
+                                <li><a href="file-upload.html"><span class="icon iconfugue16-inbox"></span> File Upload</a></li>
+                                <li><a href="form-wizard.html"><span class="icon iconfugue16-wand-hat"></span> Wizards</a></li>
+                            </ul>
+                        </li>
+                        <!-- End DESENVOLVER Menu -->
+
+                        <!-- Start CONTATOS Menu -->
+                        <li class="accordion-group">
+                            <a data-toggle="collapse" data-parent="#nav-mainmenu" href="#statictics" class="{% if area_contatos %}active{% endif %}"><span class="icon iconfa-phone-sign"></span><span class="text">Contatos</span><span class="badge pull-right">2</span></a>
+                            <ul class="nav-submenu collapse {% if area_contatos %}in{% endif %}" id="statictics">
+                                <li><a href="chart-summary.html"><span class="icon iconfugue16-chart-up"></span> Custom Statistics</a></li>
+                                <li><a href="charts.html"><span class="icon iconfugue16-chart"></span> Charts</a></li>
+                            </ul>
+                        </li>
+                        <!-- End CONTATOS Menu -->
+
+			<!-- Start CONHECIMENTO Menu -->
+                        <li class="accordion-group">
+                            <a data-toggle="collapse" data-parent="#nav-mainmenu" href="#tables" class="{% if area_conhecimento %}active{% endif %}"><span class="icon iconfa-folder-open"></span><span class="text">Conhecimento</span><span class="badge pull-right">3</span></a>
+                            <ul class="nav-submenu collapse {% if area_conhecimento %}in{% endif %}" id="tables">
+                                <li><a href="table-static.html"><span class="icon iconfugue16-table"></span> Static Table</a></li>
+                                <li><a href="table-dynamic.html"><span class="icon iconfugue16-table--plus"></span> Dynamic Table</a></li>
+                                <li><a href="table-responsive.html"><span class="icon iconfugue16-table--pencil"></span> Responsive Table</a></li>
+                            </ul>
+                        </li>
+                        <!-- End CONHECIMENTO Menu -->
+
+			<!-- Start INICIATIVAS Menu -->
+			<li class="accordion-group">
+                            <a data-toggle="collapse" data-parent="#nav-mainmenu" href="#iniciativa" class="{% if area_iniciativa %}active{% endif %}"><span class="icon iconelusive-idea"></span><span class="text">Iniciativas</span><span class="badge pull-right">4</span></a>
+                            <!-- Start INICIATIVAS Sub Menu -->
+                            <ul class="nav-submenu collapse {% if area_iniciativa %}in{% endif %}" id="iniciativa">
+				{% if membro.cargo.lider %}
+				<li><a href="/visualizar_graficos/" class="{% ifequal diretorio 'Implementar' %}active{% endifequal %}"><span class="icon iconfugue16-chart"></span> Implementar</a></li>
+                                <li><a href="/historico/" class="{% ifequal diretorio 'Historico' %}active{% endifequal %}"><span class="icon iconfugue16-clock"></span> Histórico</a></li>
+				{% endif %}
+				<li><a href="/visualizar_iniciativas/" class="{% ifequal diretorio 'Cadastrar Iniciativa' %}active{% endifequal %}"><span class="icon icon-pencil"></span> Cadastrar Iniciativas</a></li>
+                                <li><a href="/minhas_iniciativas/" class="{% ifequal diretorio 'Minhas Iniciativas' %}active{% endifequal %}"><span class="icon iconfugue16-user"></span> Minhas Iniciativas</a></li>
+                                <!--{% if membro_logado.cargo.administrador %}
+				    <li><a href="/si_iniciativas/membros/cadastrar_membros/" class="{% ifequal diretorio 'Cadastrar Membros' %}active{% endifequal %}"><span class="icon iconfugue16-user--plus"></span> Cadastrar Membros</a></li>
+				    <li><a href="/si_iniciativas/admin/" target="_blank"><span class="icon iconfugue16-equalizer"></span> Administração do Sistema</a></li>
+				{% endif %}-->
+
+                            </ul>
+                            <!-- End MEMBROS Sub Menu -->
+                        </li>
+                        <!-- End INICIATIVAS Menu -->
+
+
+
+
+                    </ul><!-- End Main Menu -->
+
+                </div><!-- End Sidebar -->
+
+                <!-- Start Main Content -->
+                <div id="main-content">
+                    <p>&nbsp;</p>
+
+                    <!-- Start Breadcrumb -->
+                    <ul class="breadcrumb">
+                        <li><a href="/si_iniciativas/">SIPJ</a></li>
+                        {% block diretorios %}
+			    {% if area_membros %}
+				<li><a href="/sipj/membros/">Membros</a></li>
+			    {% endif %}
+			    {% if area_projetos %}
+				<li><a href="/sipj/projetos/">Projetos</a></li>
+			    {% endif %}
+			    {% if area_desenvolver %}
+				<li><a href="#">Desenvolver</a></li>
+			    {% endif %}
+			    {% if area_contatos %}
+				<li><a href="#">Contatos</a></li>
+			    {% endif %}
+			    {% if area_conhecimento %}
+				<li><a href="#">Conhecimento</a></li>
+			    {% endif %}
+			    {% if area_financeiro %}
+				<li><a href="#">Financeiro</a></li>
+			    {% endif %}
+			    {% if area_iniciativa %}
+				<li><a href="/visualizar_iniciativas/">Iniciativa</a></li>
+			    {% endif %}
+			    {% if diretorio %}
+			    <li><a href="#">{{diretorio}}</a></li>
+			    {% endif %}
+			{% endblock diretorios %}
+
+                    </ul><!-- End Breadcrumb -->
+
+                    <h3>{% block titulo %}{% endblock titulo %} <small>{% block subtitulo %}{% endblock subtitulo %}</small></h3>
+
+                    <hr class="style1">
+
+                    <!-- Start Main Content -->
+		    <div class="row-fluid" >
+			<div class="span12">
+
+			{% block conteudo %}{% endblock conteudo %}
+					    </div> <!-- span 12 -->
+                    </div><!-- End -->
+					<br/>
+                </div><!-- End Main Content -->
+
+            </div>
+        </div>
+
+
+        <!-- Flot Plugins -->
+
+	<!-- Site -->
+    <script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/jasny-bootstrap.min.js"></script>
+	<script src="/static/js/plugins/jquery.placeholder.min.js"></script>
+	<script src="/static/js/application.js"></script>
+
+        <!-- Plugins -->
+
+	{% block footertag %}
+	{% endblock footertag %}
+    </body>
+</html>

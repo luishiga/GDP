@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar funcionário{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block titulo %}Cadastramento funcionário{% endblock titulo %}
+
+{% block subtitulo %}Insira os dados para o cadastro de um novo funcionário.{% endblock subtitulo %}
+
+{% block conteudo %}
+<form method="POST" action="/cadastra_funcionario/">{% csrf_token %}
+    {{usuario_form.as_table}}
+    <br>
+    {{funcionario_form.as_table}}
+    <br>
+    {{contato_form.as_table}}
+    <br>
+    <button class="btn" type="submit">Cadastrar</button>
+    <div class="clearfix"></div>
+</form>
+{% endblock conteudo %}
+
+{% block footertag %}
+{% endblock footertag %}

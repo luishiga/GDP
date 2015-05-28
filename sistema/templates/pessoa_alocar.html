@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Alocar pessoal{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block titulo %}Alocação de pessoas{% endblock titulo %}
+
+{% block subtitulo %}Selecione a equipe responsável pelo projeto {{projeto_corrente.nome}}{% endblock subtitulo %}
+
+{% block conteudo %}
+
+{% if equipe_atual%}
+<h3>Equipe atual</h3>
+    <table class="table table-hover" id="table2">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cargo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for func in equipe_atual%}
+            <tr class="odd gradeX">
+                <td>{{func.nome}}</td>
+                <td>{{func.get_cargo_display}}</td>
+            </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+{% endif %}
+
+<form method="POST" action="/aloca_pessoa/{{projeto_corrente.id}}/">{% csrf_token %}
+    {{alocar_form.as_table}}
+    <br>
+    <button class="btn" type="submit">Cadastrar</button>
+    <div class="clearfix"></div>
+</form>
+{% endblock conteudo %}
+
+{% block footertag %}
+{% endblock footertag %}
