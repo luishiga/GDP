@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Início{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block titulo %}Página principal{% endblock titulo %}
+
+{% block subtitulo %}Escolha a ação desejada{% endblock subtitulo %}
+
+{% block conteudo %}
+
+    <div class="span4">
+        <div class="widget">
+            <div class="widget-content">
+                <a href="/cadastra_funcionario/"><div class="widget-content-inner">
+                    <div class="chart-summary-icon">
+                        <span class="icon iconfa-group"></span>
+                        <span class="title">Cadastrar funcionário</span>
+                        <span class="value">{{nfunc}}</span>
+                        <span class="description">Funcionários cadastrados</span>
+                    </div>
+                </div></a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="span4">
+        <div class="widget">
+            <div class="widget-content">
+<a href="/cadastra_projeto/">
+                <div class="widget-content-inner">
+                    <div class="chart-summary-icon">
+                        <span class="icon iconfa-paste"></span>
+                        <span class="title">Cadastrar projeto</span>
+                        <span class="value">{{nproj}}</span>
+                        <span class="description">Projetos cadastrados</span>
+                    </div>
+                </div>
+</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="span4">
+        <div class="widget">
+            <div class="widget-content">
+<a href="/projetos/">
+                <div class="widget-content-inner">
+                    <div class="chart-summary-icon">
+                        <span class="icon iconfa-folder-open"></span>
+                        <span class="title">Ver projetos</span><br><br>
+                    </div>
+                </div>
+</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock conteudo %}
+
+{% block footertag %}
+{% endblock footertag %}

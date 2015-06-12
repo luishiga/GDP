@@ -3,7 +3,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from sistema.forms import *
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -37,7 +37,17 @@ def logout_sistema (request):
 def home(request):
     # if funcionario.usuario.senha == funcionario.email:
     #     alerta =
-    return HttpResponse("Welcome home!")
+    usuario = request.user
+    funcionario_corrente = Funcionario.objects.get(usuario=usuario)
+    try:
+        nfunc = Funcionario.objects.count()
+    except:
+        nfunc = 0
+    try:
+        nproj = Projeto.objects.count()
+    except:
+        nproj = 0
+    return render (request, "inicio.html",locals())
 
 # cadastro do funcionario, sendo o usuario e senha igual ao email
 
@@ -57,9 +67,8 @@ def funcionario_cadastrar(request):
                 user = User.objects.create_user(username=email,email=email,password=email)
                 user.save()
                 funcionario = funcionario_form.save(commit = False)
-                funcionario.user = user
+                funcionario.usuario = user
                 funcionario.contato = contato
-                return H
                 funcionario.save()
                 messages.success(request, 'Funcionário criado com sucesso!')
         else:
@@ -76,19 +85,33 @@ def projeto_cadastrar(request):
         contato_form = ContatoForm(request.POST)
         if projeto_form.is_valid() and cliente_form.is_valid():
             projeto = projeto_form.save()
+            criar_etapas(projeto.id)
             contato = contato_form.save()
             cliente = cliente_form.save(commit=False)
             cliente.projeto = projeto
             cliente.contato = contato
             cliente.save()
             messages.success(request, 'Projeto cadastrado com sucesso!')
-            return HttpResponse("OK")
-            # return redirect('/alocar_pessoa/{{projeto.id}}')
+            return redirect('/aloca_pessoa/%d/' % projeto.id)
         else:
             messages.error(request, 'Confira o preenchimento dos dados')
     return render (request, "projeto_cadastrar.html", locals())
 
+def criar_etapas(id_projeto):
+    projeto_corrente = Projeto.objects.get(id=id_projeto)
+    etapa1 = Etapa.objects.create(nome="Modelo de Negócios",projeto=projeto_corrente)
+    etapa2 = Etapa.objects.create(nome="Requisitos",projeto=projeto_corrente)
+    etapa3 = Etapa.objects.create(nome="Análise e Design",projeto=projeto_corrente)
+    etapa4 = Etapa.objects.create(nome="Implementação",projeto=projeto_corrente)
+    etapa5 = Etapa.objects.create(nome="Teste",projeto=projeto_corrente)
+    etapa6 = Etapa.objects.create(nome="Desenvolvimento",projeto=projeto_corrente)
+    return
+
+@login_required
 def pessoa_alocar(request, id_projeto):
+    usuario = request.user
+    funcionario_corrente = Funcionario.objects.get(usuario=usuario)
+    cargo = funcionario_corrente.cargo
     projeto_corrente = Projeto.objects.get(id=id_projeto)
     equipe_atual = Funcionario.objects.filter(projeto=projeto_corrente)
     alocar_form = AlocarForm()
@@ -100,12 +123,16 @@ def pessoa_alocar(request, id_projeto):
             gerente.cargo = 'g'
             analista1 = alocar_form.cleaned_data['analista1']
             analista1.projeto = projeto_corrente
+            analista1.cargo = 'a'
             analista2 = alocar_form.cleaned_data['analista2']
             analista2.projeto = projeto_corrente
+            analista2.cargo = 'a'
             analista3 = alocar_form.cleaned_data['analista3']
             analista3.projeto = projeto_corrente
+            analista3.cargo = 'a'
             analista4 = alocar_form.cleaned_data['analista4']
             analista4.projeto = projeto_corrente
+            analista4.cargo = 'a'
             gerente.save()
             analista1.save()
             analista2.save()
@@ -116,8 +143,25 @@ def pessoa_alocar(request, id_projeto):
             messages.error(request, "Erro no envio de dados")
     return render(request, "pessoa_alocar.html", locals())
 
-# def documento_requisitar():
+def projetos_listar(request):
+    usuario = request.user
+    funcionario_corrente = Funcionario.objects.get(usuario=usuario)
+    cargo = funcionario_corrente.cargo
+    lista = Projeto.objects.all()
+    return render(request, "projetos.html", locals())
 
+def projeto_ver(request, id_projeto):
+    projeto_corrente = Projeto.objects.get(id = id_projeto)
+    etapas = Etapa.objects.filter(projeto = projeto_corrente)
+    return render(request, "projeto.html", locals())
+
+def documentos_ver(request, id_etapa):
+    etapa_corrente = Etapa.objects.get(id = id_etapa)
+    documentos = Documento.objects.filter(etapa = etapa_corrente)
+    return render(request,"documentos.html", locals())
+# permissao de gerente do projeto
+# def documento_requisitar():
+    #documeto requisitado = True
 # def documento_avaliar():
 
 # def documento_aprovar():

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Alocar pessoal{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block titulo %}Projetos{% endblock titulo %}
+
+{% block subtitulo %}Lista de todos projetos{% endblock subtitulo %}
+
+{% block conteudo %}
+
+<ol>
+{% for etapa in etapas %}
+    <li><a href="/situacao/{{etapa.id}}">{{etapa.nome}}</a></li>
+{% endfor %}
+</ol>
+
+{% endblock conteudo %}
+
+{% block footertag %}
+{% endblock footertag %}

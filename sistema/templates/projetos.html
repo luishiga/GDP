@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Alocar pessoal{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block titulo %}Projetos{% endblock titulo %}
+
+{% block subtitulo %}Lista de todos projetos{% endblock subtitulo %}
+
+{% block conteudo %}
+
+<table class="table table-hover" id="table2">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Início</th>
+            <th>Prazo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for projeto in lista%}
+        <tr class="odd gradeX">
+            <td><a href="/projetos/{{projeto.id}}">{{projeto.nome_projeto}}</a></td>
+            <td>{{projeto.inicio}}</td>
+            <td>{{projeto.prazo}}</td>
+            <td><div class="tr-action">
+                <div class="tr-action-inner">
+                <div class="btn-group">
+                <a href="/projetos/{{projeto.id}}" class="btn"><i class="icon icon-eye-open"></i></a>
+                </div>
+                </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor%}
+    </tbody>
+</table>
+
+{% endblock conteudo %}
+
+{% block footertag %}
+{% endblock footertag %}

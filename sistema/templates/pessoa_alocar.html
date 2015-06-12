@@ -28,15 +28,17 @@
             </tr>
             {% endfor%}
         </tbody>
-    </table>
+    </table><br>
 {% endif %}
 
+{% if cargo == 'c' %}
 <form method="POST" action="/aloca_pessoa/{{projeto_corrente.id}}/">{% csrf_token %}
     {{alocar_form.as_table}}
     <br>
     <button class="btn" type="submit">Cadastrar</button>
     <div class="clearfix"></div>
 </form>
+{% endif %}
 {% endblock conteudo %}
 
 {% block footertag %}

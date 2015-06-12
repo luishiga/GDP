@@ -33,7 +33,7 @@ status_documento = (
 
 class Projeto(models.Model):
 
-    nome = models.CharField("Nome do Projeto ", max_length=128)
+    nome_projeto = models.CharField("Nome do Projeto ", max_length=128)
     inicio = models.DateField("Data de criação")
     prazo = models.DateField("Prazo final")
 
@@ -42,7 +42,7 @@ class Projeto(models.Model):
         verbose_name_plural = "Projetos"
 
     def __unicode__(self):
-        return self.nome
+        return self.nome_projeto
 
 class Contato(models.Model):
 
@@ -93,8 +93,8 @@ class Cliente(models.Model):
 class Etapa(models.Model):
 
     nome = models.CharField("Nome da Etapa", max_length=128)
-    inicio = models.DateField("Data de criação")
-    prazo = models.DateField("Prazo Final")
+    inicio = models.DateField("Data de criação", blank=True, null=True)
+    prazo = models.DateField("Prazo Final", blank=True, null=True)
     status = models.CharField(max_length=16, choices = status_etapa)
     projeto = models.ForeignKey(Projeto)
 
@@ -103,7 +103,7 @@ class Etapa(models.Model):
         verbose_name_plural = "Etapas"
 
     def __unicode__(self):
-        return self.nome
+        return self.nome + ' - ' + self.projeto.nome_projeto
 
 class Documento(models.Model):
 
@@ -113,7 +113,7 @@ class Documento(models.Model):
     data_revisao = models.DateField("Data de revisão")
     data_aprovacao = models.DateField("Data de aprovação")
     texto = models.TextField("Detalhamento")
-    Etapa = models.ForeignKey(Etapa)
+    etapa = models.ForeignKey(Etapa)
 
     class Meta:
         verbose_name = "Documento"

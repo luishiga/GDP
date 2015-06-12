@@ -2,6 +2,7 @@
 from django.forms import ModelForm, TextInput, Select, PasswordInput, Textarea, CharField
 from django import forms
 from sistema.models import *
+from localflavor.br.forms import *
 
 # Register your forms here.
 
