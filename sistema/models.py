@@ -75,6 +75,12 @@ class Funcionario(models.Model):
     def __unicode__(self):
         return self.nome
 
+class Gerente(models.Model):
+    """docstring for Gerente"""
+    def __init__(self, arg):
+        super(Gerente, self).__init__()
+        self.arg = arg
+
 
 class Cliente(models.Model):
 
@@ -110,9 +116,9 @@ class Documento(models.Model):
     nome = models.CharField("Nome do Documento", max_length=128)
     data_criacao = models.DateField("Data de criação")
     status = models.CharField(max_length=16, choices = status_documento)
-    data_revisao = models.DateField("Data de revisão")
-    data_aprovacao = models.DateField("Data de aprovação")
-    texto = models.TextField("Detalhamento")
+    data_revisao = models.DateField("Data de revisão", blank=True, null=True)
+    data_aprovacao = models.DateField("Data de aprovação", blank=True, null=True)
+    texto = models.TextField("Detalhamento", blank=True, null=True)
     etapa = models.ForeignKey(Etapa)
 
     class Meta:

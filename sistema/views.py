@@ -5,7 +5,7 @@ from django.contrib import messages
 from sistema.forms import *
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+from datetime import date
 
 def login_sistema (request):
     if request.method=="GET":
@@ -49,8 +49,8 @@ def home(request):
         nproj = 0
     return render (request, "inicio.html",locals())
 
-# cadastro do funcionario, sendo o usuario e senha igual ao email
 
+# cadastro do funcionario, sendo o usuario e senha igual ao email
 def funcionario_cadastrar(request):
     funcionario_form = FuncionarioForm()
     contato_form = ContatoForm()
@@ -155,13 +155,32 @@ def projeto_ver(request, id_projeto):
     etapas = Etapa.objects.filter(projeto = projeto_corrente)
     return render(request, "projeto.html", locals())
 
-def documentos_ver(request, id_etapa):
+def documentos_ver(request, id_projeto, id_etapa):
+    projeto_corrente = Projeto.objects.get(id = id_projeto)
     etapa_corrente = Etapa.objects.get(id = id_etapa)
     documentos = Documento.objects.filter(etapa = etapa_corrente)
+    lista = Documento.objects.filter(etapa = etapa_corrente)
+    documento_form = DocumentoForm()
     return render(request,"documentos.html", locals())
+
 # permissao de gerente do projeto
-# def documento_requisitar():
-    #documeto requisitado = True
+def documento_requisitar(request, id_projeto, id_etapa):
+    projeto_corrente = Projeto.objects.get(id = id_projeto)
+    etapa_corrente = Etapa.objects.get(id = id_etapa)
+    if request.method == 'POST':
+        documento_form = DocumentoForm(request.POST)
+        if documento_form.is_valid():
+            documento = documento_form.save(commit=False)
+            documento.data_criacao = date.today()
+            documento.status = '0'
+            documento.etapa = etapa_corrente
+            documento.save()
+            messages.success(request,"Documento requisitado")
+        else:
+            messages.error(request,"Confira o preenchimento do campo")
+    return redirect('/projetos/%d/etapa/%d/' %(projeto_corrente.id,etapa_corrente.id))
+
+
 # def documento_avaliar():
 
 # def documento_aprovar():

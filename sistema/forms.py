@@ -36,3 +36,8 @@ class AlocarForm(forms.Form):
     analista2 = forms.ModelChoiceField(queryset=Funcionario.objects.all().order_by('nome'))
     analista3 = forms.ModelChoiceField(queryset=Funcionario.objects.all().order_by('nome'))
     analista4 = forms.ModelChoiceField(queryset=Funcionario.objects.all().order_by('nome'))
+
+class DocumentoForm(forms.ModelForm):
+    class Meta:
+        model = Documento
+        fields = ('nome',)
