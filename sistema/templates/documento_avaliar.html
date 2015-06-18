@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Alocar pessoal{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block titulo %}{{projeto_corrente.nome_projeto}}{% endblock titulo %}
+
+{% block subtitulo %}{{etapa_corrente.nome}}{% endblock subtitulo %}
+
+{% block conteudo %}
+
+<p>{{documento_corrente.texto}}</p>
+
+<a href="{{request.path}}aprova_documento" class="btn">Aprovar</a>
+<a href="{{request.path}}reprova_documento" class="btn">Reprovar</a>
+
+{% endblock conteudo %}
+
+{% block footertag %}
+{% endblock footertag %}

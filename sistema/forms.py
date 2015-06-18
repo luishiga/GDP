@@ -13,7 +13,7 @@ class LoginForm(forms.Form):
 class FuncionarioForm(forms.ModelForm):
     class Meta:
         model = Funcionario
-        exclude = ('contato','usuario', 'projeto',)
+        exclude = ('contato','usuario', 'projeto','cargo',)
 
 class ContatoForm(forms.ModelForm):
     class Meta:
@@ -41,3 +41,8 @@ class DocumentoForm(forms.ModelForm):
     class Meta:
         model = Documento
         fields = ('nome',)
+
+class EscreverForm(forms.ModelForm):
+    class Meta:
+        model = Documento
+        fields = ('texto',)

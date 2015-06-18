@@ -19,6 +19,7 @@ from sistema import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    # url(r'^criar_permissoes/', views.criar_permissoes),
     url(r'^login/$', views.login_sistema),
     url(r'^logout/$', views.logout_sistema),
     url(r'^home/$', views.home),   # a ser implementada
@@ -27,14 +28,11 @@ urlpatterns = [
     url(r'^aloca_pessoa/(?P<id_projeto>[0-9]+)/$', views.pessoa_alocar),
     url(r'^projetos/$', views.projetos_listar),
     url(r'^projetos/(?P<id_projeto>[0-9]+)/$', views.projeto_ver),
-    #url(r'^teste/(?P<id_projeto>[0-9]+)/$', views.criar_etapas),
+    url(r'^projetos/(?P<id_projeto>[0-9]+)/ver_equipe', views.pessoa_alocar),
     url(r'^projetos/(?P<id_projeto>[0-9]+)/etapa/(?P<id_etapa>[0-9]+)/$', views.documentos_ver),
     url(r'^projetos/(?P<id_projeto>[0-9]+)/etapa/(?P<id_etapa>[0-9]+)/requisita_documento/', views.documento_requisitar),
-    # url(r'^avalia_documento/', views.documento_requisitar),
-    # url(r'^aprova_documento/', views.documento_requisitar),
-    # url(r'^reprova_documento/', views.documento_requisitar),
-    # url(r'^requisita_documento/', views.documento_requisitar),
-    # url(r'^cria_documento/', views.documento_requisitar),
-    # url(r'^edita_documento/', views.documento_requisitar),
-
+    url(r'^projetos/(?P<id_projeto>[0-9]+)/etapa/(?P<id_etapa>[0-9]+)/avalia_documento/(?P<id_documento>[0-9]+)/$', views.documento_avaliar),
+    url(r'^projetos/(?P<id_projeto>[0-9]+)/etapa/(?P<id_etapa>[0-9]+)/escreve_documento/(?P<id_documento>[0-9]+)/$', views.documento_escrever),
+    url(r'^projetos/(?P<id_projeto>[0-9]+)/etapa/(?P<id_etapa>[0-9]+)/avalia_documento/(?P<id_documento>[0-9]+)/aprova_documento/$', views.documento_aprovar),
+    url(r'^projetos/(?P<id_projeto>[0-9]+)/etapa/(?P<id_etapa>[0-9]+)/avalia_documento/(?P<id_documento>[0-9]+)/reprova_documento/$', views.documento_reprovar),
 ]

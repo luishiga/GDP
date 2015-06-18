@@ -16,10 +16,10 @@
     <thead>
         <tr>
             <th>Nome</th>
-            <th>Data de Criação</th>
+            <th>Data de Requisição</th>
             <th>Status</th>
-            <th>Data de Revisão</th>
-            <th>Data de Aprovação</th>
+            <th>Última modificação</th>
+            <th>Data de Avaliação</th>
             <th></th>
         </tr>
     </thead>
@@ -34,7 +34,8 @@
             <td><div class="tr-action">
                 <div class="tr-action-inner">
                 <div class="btn-group">
-                <a href="avalia_documento/" class="btn"><i class="icon icon-eye-open"></i></a>
+                <a href="avalia_documento/{{documento.id}}" class="btn"><i class="icon icon-eye-open"></i></a>
+                <a href="escreve_documento/{{documento.id}}" class="btn"><i class="icon icon-pencil"></i></a>
                 </div>
                 </div>
                 </div>

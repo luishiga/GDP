@@ -114,10 +114,10 @@ class Etapa(models.Model):
 class Documento(models.Model):
 
     nome = models.CharField("Nome do Documento", max_length=128)
-    data_criacao = models.DateField("Data de criação")
+    data_criacao = models.DateField("Data de requisição")
     status = models.CharField(max_length=16, choices = status_documento)
-    data_revisao = models.DateField("Data de revisão", blank=True, null=True)
-    data_aprovacao = models.DateField("Data de aprovação", blank=True, null=True)
+    data_revisao = models.DateField("Última modificação", blank=True, null=True)
+    data_aprovacao = models.DateField("Data de avaliação", blank=True, null=True)
     texto = models.TextField("Detalhamento", blank=True, null=True)
     etapa = models.ForeignKey(Etapa)
 

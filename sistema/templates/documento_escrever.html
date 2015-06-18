@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Alocar pessoal{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block titulo %}{{projeto_corrente.nome_projeto}}{% endblock titulo %}
+
+{% block subtitulo %}{{etapa_corrente.nome}}{% endblock subtitulo %}
+
+{% block conteudo %}
+
+<form method="POST" action="{{request.path}}">{% csrf_token %}
+    {{documento_form.as_table}}
+    <button class="btn" type="submit">Salvar</button>
+    <div class="clearfix"></div>
+</form>
+<a href="/projetos/{{projeto_corrente.id}}/etapa/{{etapa_corrente.id}}" class="btn">Voltar</a>
+{% endblock conteudo %}
+
+{% block footertag %}
+{% endblock footertag %}
