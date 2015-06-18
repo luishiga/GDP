@@ -27,15 +27,15 @@
         {% for documento in lista%}
         <tr class="odd gradeX">
             <td>{{documento.nome}}</td>
-            <td>{{documento.data_criacao}}</td>
+            <td>{{documento.inicio}}</td>
             <td>{{documento.get_status_display}}</td>
             <td>{{documento.data_revisao}}</td>
             <td>{{documento.data_aprovacao}}</td>
             <td><div class="tr-action">
                 <div class="tr-action-inner">
                 <div class="btn-group">
-                <a href="avalia_documento/{{documento.id}}" class="btn"><i class="icon icon-eye-open"></i></a>
                 <a href="escreve_documento/{{documento.id}}" class="btn"><i class="icon icon-pencil"></i></a>
+                <a href="avalia_documento/{{documento.id}}" class="btn"><i class="icon icon-eye-open"></i></a>
                 </div>
                 </div>
                 </div>
@@ -44,6 +44,7 @@
         {% endfor%}
     </tbody>
 </table>
+<br>
 {% endif %}
 
 <form method="POST" action="requisita_documento/">{% csrf_token %}

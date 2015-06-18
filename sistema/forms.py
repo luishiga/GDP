@@ -23,7 +23,7 @@ class ContatoForm(forms.ModelForm):
 class ProjetoForm(forms.ModelForm):
     class Meta:
         model = Projeto
-        fields = '__all__'
+        exclude = ('status',)
 
 class ClienteForm(forms.ModelForm):
     class Meta:
@@ -46,3 +46,13 @@ class EscreverForm(forms.ModelForm):
     class Meta:
         model = Documento
         fields = ('texto',)
+
+class ProjetoStatusForm(forms.ModelForm):
+    class Meta:
+        model = Projeto
+        fields = '__all__'
+
+class EtapaForm(forms.ModelForm):
+    class Meta:
+        model = Etapa
+        exclude = ('projeto',)

@@ -100,9 +100,17 @@
 			    <div class="btn-group">
 
 				    <img src="/static/img/avatar/40x40/avatar4.png" width="40px" height="40px" alt="{{membro_logado.user.get_full_name}}" class="dropdown-toggle" data-toggle="dropdown">
+                </div>
 
-			    </div>
-						</div>
+                        </div>
+
+
+                        <div class="profile-info">
+                            <span class="name">{{funcionario_corrente.nome}}</span>
+                            <span class="job">{{funcionario_corrente.get_cargo_display}}</span>
+                        </div>
+
+
                         <div class="profile-panel">
                             <!-- Start Messages -->
                             <div class="profile-panel-menu" id="panel-message">
@@ -114,16 +122,10 @@
 
                             <!-- Start Notification -->
                             <div class="profile-panel-menu" id="panel-notification">
-                                <a href="#" data-toggle="dropdown" class="menu">
-                                    <i class="icon icon-bell"></i>
-                                    <span class="text">Notificações</span>
-                                    <span class="label label-important">0</span>
+                                <a href="/admin/" class="menu">
+                                    <i class="icon icon-user"></i>
+                                    <span class="text">Administrador</span>
                                 </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li class="header">Notificações</li>
-                                    {% block notificacoes %} {% endblock notificacoes %}
-                                    <li class="footer"><a href="#">Apagar todas</a></li>
-                                </ul>
                             </div><!-- End Notification -->
                         </div>
                     </div><!-- End Profile Panel -->

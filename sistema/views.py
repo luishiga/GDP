@@ -73,16 +73,16 @@ def home(request):
     c = funcionario_corrente.cargo
     if c == 'g' or c == 'a':
         projeto = funcionario_corrente.projeto
-        lista_etapas = Etapas.objects.filter(projeto = projeto)
+        lista_etapas = Etapa.objects.filter(projeto = projeto)
         for e in lista_etapas:
-            lista_doc = Documentos.objects.filter(etapa = e)
+            lista_doc = Documento.objects.filter(etapa = e)
             for d in lista_doc:
                 if d.status =='1' and c =='g':
                     messages.warning(request, 'Você tem documento(s) a ser(em) avaliado(s)')
-                    break
+                    c = '0'
                 elif d.status =='0' and c =='a':
                     messages.warning(request, 'Você tem documento(s) requisitado(s)')
-                    break
+                    c = '0'
     return render (request, "inicio.html",locals())
 
 
@@ -90,6 +90,7 @@ def home(request):
 @login_required
 @permission_required('auth.perm_c', login_url='/home/')
 def funcionario_cadastrar(request):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
     funcionario_form = FuncionarioForm()
     contato_form = ContatoForm()
     if request.method == 'POST':
@@ -117,6 +118,7 @@ def funcionario_cadastrar(request):
 @login_required
 @permission_required('auth.perm_c', login_url='/home/')
 def projeto_cadastrar(request):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
     projeto_form = ProjetoForm()
     cliente_form = ClienteForm()
     contato_form = ContatoForm()
@@ -149,7 +151,6 @@ def criar_etapas(id_projeto):
     return
 
 @login_required
-@permission_required('auth.perm_c', login_url='/home/')
 def pessoa_alocar(request, id_projeto):
     usuario = request.user
     funcionario_corrente = Funcionario.objects.get(usuario=usuario)
@@ -213,24 +214,80 @@ def limpa_equipe_atual(id_projeto):
     return
 
 @login_required
-@permission_required('auth.perm_a', login_url='/home/')
+# @permission_required('auth.perm_a', login_url='/home/')
 def projetos_listar(request):
     usuario = request.user
     funcionario_corrente = Funcionario.objects.get(usuario=usuario)
     cargo = funcionario_corrente.cargo
+    if cargo == 'g' or cargo == 'a':
+        lista=[]
+        lista.append(funcionario_corrente.projeto)
+    else:
+        lista = Projeto.objects.all()
     lista = Projeto.objects.all()
+    # for p in lista:
+    #     etapas = Etapa.objects.filter(projeto = p)
+    #     p.status = True
+    #     for e in etapas:
+    #         if e.status != '2':
+    #             p.status = False
+    #             break
+    #     p.save()
     return render(request, "projetos.html", locals())
 
 @login_required
+@permission_required('auth.perm_g', login_url='/home/')
+def projeto_status(request, id_projeto):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
+    projeto_corrente = Projeto.objects.get(id = id_projeto)
+    projeto_form = ProjetoStatusForm(instance=projeto_corrente)
+    if request.method == 'POST':
+        projeto_form = ProjetoStatusForm(request.POST)
+        if projeto_form.is_valid():
+            p = projeto_form.save(commit=False)
+            projeto_corrente.inicio = p.inicio
+            projeto_corrente.prazo = p.prazo
+            projeto_corrente.status = p.status
+            projeto_corrente.save()
+            messages.success(request,"Status do projeto atualizado")
+            return redirect("/projetos/")
+        else:
+            messages.error(request,"Confira o preenchimento do campo")
+    return render(request, "projeto_status.html", locals())
+@login_required
 @permission_required('auth.perm_a', login_url='/home/')
 def projeto_ver(request, id_projeto):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
     projeto_corrente = Projeto.objects.get(id = id_projeto)
     etapas = Etapa.objects.filter(projeto = projeto_corrente)
     return render(request, "projeto.html", locals())
 
 @login_required
+@permission_required('auth.perm_g', login_url='/home/')
+def etapa_status(request, id_projeto, id_etapa):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
+    projeto_corrente = Projeto.objects.get(id = id_projeto)
+    etapa_corrente = Etapa.objects.get(id = id_etapa)
+    etapa_form = EtapaForm(instance=etapa_corrente)
+    if request.method == 'POST':
+        etapa_form = EtapaForm(request.POST)
+        if etapa_form.is_valid():
+            e = etapa_form.save(commit=False)
+            etapa_corrente.nome = e.nome
+            etapa_corrente.inicio = e.inicio
+            etapa_corrente.prazo = e.prazo
+            etapa_corrente.status = e.status
+            etapa_corrente.save()
+            messages.success(request,"Status da etapa atualizada")
+            return redirect("/projetos/%d/" % projeto_corrente.id)
+        else:
+            messages.error(request,"Confira o preenchimento do campo")
+    return render(request, "etapa_status.html", locals())
+
+@login_required
 @permission_required('auth.perm_a', login_url='/home/')
 def documentos_ver(request, id_projeto, id_etapa):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
     projeto_corrente = Projeto.objects.get(id = id_projeto)
     etapa_corrente = Etapa.objects.get(id = id_etapa)
     documentos = Documento.objects.filter(etapa = etapa_corrente)
@@ -241,6 +298,7 @@ def documentos_ver(request, id_projeto, id_etapa):
 @login_required
 @permission_required('auth.perm_g', login_url='/home/')
 def documento_requisitar(request, id_projeto, id_etapa):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
     projeto_corrente = Projeto.objects.get(id = id_projeto)
     etapa_corrente = Etapa.objects.get(id = id_etapa)
     if request.method == 'POST':
@@ -259,6 +317,7 @@ def documento_requisitar(request, id_projeto, id_etapa):
 @login_required
 @permission_required('auth.perm_a', login_url='/home/')
 def documento_escrever(request, id_projeto, id_etapa, id_documento):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
     projeto_corrente = Projeto.objects.get(id = id_projeto)
     etapa_corrente = Etapa.objects.get(id = id_etapa)
     documento_corrente = Documento.objects.get(id = id_documento)
@@ -280,12 +339,14 @@ def documento_escrever(request, id_projeto, id_etapa, id_documento):
 @login_required
 @permission_required('auth.perm_g', login_url='/home/')
 def documento_avaliar(request, id_projeto, id_etapa, id_documento):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
     documento_corrente = Documento.objects.get(id = id_documento)
     return render(request,"documento_avaliar.html", locals())
 
 @login_required
 @permission_required('auth.perm_g', login_url='/home/')
 def documento_aprovar(request, id_projeto, id_etapa, id_documento):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
     projeto_corrente = Projeto.objects.get(id = id_projeto)
     etapa_corrente = Etapa.objects.get(id = id_etapa)
     documento_corrente = Documento.objects.get(id = id_documento)
@@ -297,6 +358,7 @@ def documento_aprovar(request, id_projeto, id_etapa, id_documento):
 @login_required
 @permission_required('auth.perm_g', login_url='/home/')
 def documento_reprovar(request, id_projeto, id_etapa, id_documento):
+    funcionario_corrente = Funcionario.objects.get(usuario=request.user)
     projeto_corrente = Projeto.objects.get(id = id_projeto)
     etapa_corrente = Etapa.objects.get(id = id_etapa)
     documento_corrente = Documento.objects.get(id = id_documento)

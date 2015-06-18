@@ -34,9 +34,9 @@ status_documento = (
 class Projeto(models.Model):
 
     nome_projeto = models.CharField("Nome do Projeto ", max_length=128)
-    inicio = models.DateField("Data de criação")
-    prazo = models.DateField("Prazo final")
-
+    inicio = models.DateField("Data de criação", null = True)
+    prazo = models.DateField("Prazo final", null = True)
+    status = models.BooleanField("Concluído", default = False, blank = True)
     class Meta:
         verbose_name = "Projeto"
         verbose_name_plural = "Projetos"

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar projeto{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block titulo %}Cadastro de projeto{% endblock titulo %}
+
+{% block subtitulo %}Insira os dados para o cadastro de um novo projeto.{% endblock subtitulo %}
+
+{% block conteudo %}
+<form method="POST" action="{{request.path}}">{% csrf_token %}
+    {{etapa_form.as_table}}
+    <button class="btn" type="submit">Salvar</button>
+    <div class="clearfix"></div>
+</form>
+<br>
+<a href="/projetos/{{projeto_corrente.id}}" class="btn">Voltar</a>
+{% endblock conteudo %}
+
+{% block footertag %}
+{% endblock footertag %}

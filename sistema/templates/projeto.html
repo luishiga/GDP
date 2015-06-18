@@ -5,18 +5,45 @@
 {% block extrahead %}
 {% endblock extrahead %}
 
-{% block titulo %}Projetos{% endblock titulo %}
+{% block titulo %}{{projeto_corrente.nome_projeto}}{% endblock titulo %}
 
-{% block subtitulo %}Lista de todos projetos{% endblock subtitulo %}
+{% block subtitulo %}{% endblock subtitulo %}
 
 {% block conteudo %}
 
-<ol>
-{% for etapa in etapas %}
-    <li><a href="etapa/{{etapa.id}}">{{etapa.nome}}</a></li>
-{% endfor %}
-</ol>
-
+{% if etapas %}
+<table class="table table-hover" id="table2">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Início</th>
+            <th>Prazo</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in etapas%}
+        <tr class="odd gradeX">
+            <td>{{e.nome}}</td>
+            <td>{{e.inicio}}</td>
+            <td>{{e.prazo}}</td>
+            <td>{{e.get_status_display}}</td>
+            <td><div class="tr-action">
+                <div class="tr-action-inner">
+                <div class="btn-group">
+                <a href="etapa_atualiza/{{e.id}}" class="btn"><i class="icon icon-pencil"></i></a>
+                <a href="etapa/{{e.id}}" class="btn"><i class="icon icon-eye-open"></i></a>
+                </div>
+                </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor%}
+    </tbody>
+</table>
+<br>
+{% endif %}
 {% endblock conteudo %}
 
 {% block footertag %}

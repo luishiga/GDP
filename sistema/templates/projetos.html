@@ -17,6 +17,7 @@
             <th>Nome</th>
             <th>Início</th>
             <th>Prazo</th>
+            <th>Concluído</th>
             <th></th>
         </tr>
     </thead>
@@ -26,10 +27,16 @@
             <td><a href="/projetos/{{projeto.id}}">{{projeto.nome_projeto}}</a></td>
             <td>{{projeto.inicio}}</td>
             <td>{{projeto.prazo}}</td>
+            <td>
+                {% if projeto.status%}Sim
+                {% else %}Não
+                {% endif %}
+            </td>
             <td><div class="tr-action">
                 <div class="tr-action-inner">
                 <div class="btn-group">
                 <a href="/projetos/{{projeto.id}}/ver_equipe/" class="btn"><i class="icon icon-wrench"></i></a>
+                <a href="/projetos/{{projeto.id}}/modifica_status/" class="btn"><i class="icon icon-pencil"></i></a>
                 <a href="/projetos/{{projeto.id}}" class="btn"><i class="icon icon-eye-open"></i></a>
                 </div>
                 </div>
